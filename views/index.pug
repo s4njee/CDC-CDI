@@ -1,0 +1,85 @@
+extends layout
+block header
+    include header
+block content
+  link(rel='stylesheet', href='http://bootswatch.com/yeti/bootstrap.min.css')
+  h1(class='headertitle')= title
+  h3(class="nomargin")
+    small(class="datagovlink")
+        a(href="https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi-e50c9") data.gov
+  form(action="/")
+    span(class="col-md-3")
+      h5 State
+      select(class="form-control", name="state", value=state)
+          option
+          each state in s
+            if sdefault == state 
+                option(selected) #{state}
+            else
+                option #{state}
+    span(class="col-md-3")
+      h5 General Indicator
+      select(class="form-control", name="topic")
+          option
+          each topic in t
+            if tdefault == topic
+                option(selected) #{topic}
+            else
+                option #{topic}
+    span(class="col-md-3")
+      h5 Year 
+      select(class="form-control", name="yearstart")
+          option
+          each year in y
+            if ydefault == year
+                option(selected) #{year}
+            else
+                option #{year}
+    span(class="col-md-3")
+      h5 Stratification 
+      select(class="form-control", name="stratification")
+          option
+          each s in strat1
+            if stratdefault == s
+                option(selected) #{s}
+            else
+                option #{s}
+    span(class="col-md-8")
+      h5 Specific Indicators(stacks with general indicator) 
+      select(id='hidden',class="form-control", name="question" )
+          option
+          each question in q
+            if qdefault == question
+                option(selected) #{question}
+            else
+                option #{question}
+      div
+        span
+          input(type='submit', class='submitbutton btn btn-primary')
+        span
+          h5 Show X Results
+          input(type="text", class="form-control", value="500", id="formresults", name="numresults") 
+          h5 #{doccount} result(s) found
+  table(class="table")
+    tr
+        th State
+        th Year
+        th Question
+        th Data
+        th
+        th Data Type / Data[ext]
+        th Stratification
+    each user in u
+        tr
+             td #{user.LocationDesc}
+             td #{user.YearStart}
+             td #{user.Question}
+             td(class='datavalue') #{user.DataValue}
+             td #{user.DataValueUnit}
+             td #{user.DataValueType}
+             td #{user.Stratification1}
+        tr
+  h4 Results capped at 500 entries. 
+  h4 If no results shown, adjust filters.
+  h4 Data not available for all entries shown in table.
+
