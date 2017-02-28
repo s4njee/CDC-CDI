@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 var monk = require('monk');
-var db = monk('mongodb://s4njee:23fP%iF7ObPgPGKQtf2jJJ6sJm09y6hyy%cR#&Ye@ds145289.mlab.com:45289/cdc ');
+var db = monk('mongodb://sanjee:ZCHpzC3zC0smgSLA@cluster0-shard-00-00-shg68.mongodb.net:27017,cluster0-shard-00-01-shg68.mongodb.net:27017,cluster0-shard-00-02-shg68.mongodb.net:27017/cdc?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
 var collection = db.get('data');
 var ua = require('universal-analytics');
 var visitor = ua('UA-90093602-1')
